@@ -1,4 +1,5 @@
 import './App.css'
+import Home from './pages/Home';
 import MovieCard from './Component/MovieCard' 
 function App() {
   
@@ -7,7 +8,8 @@ function App() {
   return (
     <>
 
-      {movieNumber===1 && <MovieCard movie={{title:"Dhurander" ,release_date:2026}}/>}
+      {/* {movieNumber===1 && <MovieCard movie={{title:"Dhurander" ,release_date:2026}}/>} */}
+      <Home/>
     </>
   )
 }
