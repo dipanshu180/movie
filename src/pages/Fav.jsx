@@ -1,3 +1,4 @@
+import '../css/Fav.css'
 function Fav()
 {
     
