@@ -1,6 +1,8 @@
 import './App.css'
 import Home from './pages/Home';
+import Fav from './pages/Fav';
 import MovieCard from './Component/MovieCard' 
+import { Routes , Route } from 'react-router-dom';
 function App() {
   
 
@@ -9,7 +11,11 @@ function App() {
     <>
 
       {/* {movieNumber===1 && <MovieCard movie={{title:"Dhurander" ,release_date:2026}}/>} */}
-      <Home/>
+      <Routes>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/fav' element={<Fav/>}/>
+      </Routes>
+        
     </>
   )
 }

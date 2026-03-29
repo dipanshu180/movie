@@ -1,8 +1,12 @@
-function Home()
+function Fav()
 {
-    const movie = [{id:1 , title: "Dhurander", release_date : 2025 }]
-
+    
     return(
-        <div className="home"></div>
+        <div className="fav-empty">
+            <h2>No Favorite Movie Yet</h2>
+            <p>Start Adding Movie to your Fav List</p>
+        </div>
     )
 }
+
+export default Fav
