@@ -1,18 +1,31 @@
 import MovieCard from "../Component/MovieCard"
-import { useState } from "react";
+import { useState , useEffect, use} from "react";
+import { searchMovies , getPopularMovies } from "../service/api";
 import '../css/Home.css'
 
 function Home(){
 
-    const movies = [
-        {id:1 , title:"Abba na mmane" , release_date: "2020"},
-        {id:2 , title:"Babar kii billi" , release_date: "2021"},
-        {id:3 , title:"Chuhiya maare billi" , release_date: "2022"},
-        {id:4 , title:"Doodh peelo" , release_date: "2023"},
-        {id:4 , title:"Doodh peelo" , release_date: "2023"},
-    ]
-
+    const  [movies, setMovies] = useState([]);
     const [searchQuery , setSearchQuery] = useState("");
+    const [loading , setLoading] = useState(false);
+    const [error , setError] = useState(null);
+
+    useEffect(()=> {
+        const loadMovies = async () =>{
+            try{
+                const popularMovies = await getPopularMovies();
+                setMovies(popularMovies);
+            }
+            catch(error){
+                console.error("Error fetching movies:", error);
+                setError(error);
+            }
+            finally{
+                setLoading(false);
+        }
+    }
+    loadMovies();
+    } , [])
 
     const handleSubmit = (e) =>{
         e.preventDefault()
@@ -26,7 +39,11 @@ function Home(){
                 <input type="text" placeholder="Search your movie..."  value={searchQuery} onChange={e => setSearchQuery(e.target.value)}/>
                 <button type="submit" className="search-button">Search</button>
             </form>
-            <div className="movie-grid">{movies.map(movie => <MovieCard movie ={movie} key = {movie.id}/>)}</div>
+
+            {error && <div className="error">Error: {error.message}</div>}
+
+            {loading ? (<div className="loading">Loading...</div> ):( 
+            <div className="movie-grid">{movies.map(movie => <MovieCard movie ={movie} key = {movie.id}/>)}</div>)}
 
         </div>
     )
